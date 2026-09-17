@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ibt. Fernando Gómez | Portfolio</title>
+    <!-- Fuentes: Plus Jakarta Sans (Headings) e Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        /* Variables Globales - MODO CLARO "Precision Bio-Digital" */
+        :root {
+            --bg-base: #f7f9ff;
+            --bg-surface: #ffffff;
+            --bg-nav: rgba(247, 249, 255, 0.95);
+            --text-main: #081d2c;
+            --text-muted: #5c6f81;
+            --accent-primary: #0b315b;
+            --accent-secondary: #3baac6;
+            --border-color: #b0c4d9;
+            --shadow-soft: 0 4px 6px -1px rgba(11, 49, 91, 0.05);
+            --shadow-hover: 0 8px 24px -4px rgba(11, 49, 91, 0.08);
+            --modal-overlay: rgba(31, 50, 66, 0.6);
+            --btn-bg: #e7f2ff;
+            --btn-hover: #d1e5fa;
+            --font-display: 'Plus Jakarta Sans', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --border-radius: 4px;
+            --border-radius-card: 8px;
+        }
+
+        /* Auto Modo Oscuro - "Nexus Precision Engineering" */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-base: #0d141d;
+                --bg-surface: #151c25;
+                --bg-nav: rgba(13, 20, 29, 0.9);
+                --text-main: #dce3f0;
+                --text-muted: #879397;
+                --accent-primary: #6dd4f1;
+                --accent-secondary: #3baac6;
+                --border-color: #3e484c;
+                --shadow-soft: 0 4px 10px rgba(0, 0, 0, 0.4);
+                --shadow-hover: 0 8px 32px -4px rgba(11, 49, 91, 0.5), 0 0 16px -2px rgba(59, 170, 198, 0.25);
+                --modal-overlay: rgba(7, 16, 24, 0.9);
+                --btn-bg: rgba(11, 49, 91, 0.35);
+                --btn-hover: #19202a;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            font-size: 15px;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .logo {
+            font-family: var(--font-display);
+        }
+
+        /* Sistema Multi-idioma CSS */
+        [data-lang] { display: none; }
+        body.lang-es [data-lang="es"] { display: block; }
+        body.lang-en [data-lang="en"] { display: block; }
+        body.lang-de [data-lang="de"] { display: block; }
+        
+        body.lang-es span[data-lang="es"],
+        body.lang-en span[data-lang="en"],
+        body.lang-de span[data-lang="de"] { display: inline; }
+
+        /* Barra de Navegación superior */
+        .top-bar {
+            position: fixed;
+            top: 0; width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2.5rem;
+            background: var(--bg-nav);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+
+        .logo span {
+            color: var(--accent-secondary);
+        }
+
+        .lang-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 4px 10px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            border-color: var(--accent-secondary);
+            color: var(--accent-secondary);
+            background-color: var(--btn-bg);
+        }
+
+        /* Navegación por pestañas */
+        .nav-tabs {
+            position: fixed;
+            top: 65px; width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem;
+            background: linear-gradient(to bottom, var(--bg-base) 85%, transparent);
+            z-index: 999;
+        }
+
+        .tab-btn {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 8px 16px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            font-family: var(--font-body);
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            background: var(--accent-secondary);
+            color: #ffffff;
+            border-color: var(--accent-secondary);
+        }
+        @media (prefers-color-scheme: dark) {
+            .tab-btn:hover, .tab-btn.active { color: #003641; }
+        }
+
+        /* Contenedor Principal */
+        main {
+            margin-top: 150px;
+            padding: 2.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .view-section {
+            display: none;
+            width: 100%;
+            max-width: 1280px;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        .view-section.active {
+            display: block;
+        }
+
+        /* Jumbotron Bio-Digital */
+        .jumbotron {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 4rem;
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .jumbotron-text {
+            flex: 1;
+        }
+
+        /* Diseño de Foto */
+        .jumbotron-image {
+            flex-shrink: 0;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--accent-secondary);
+            box-shadow: 0 0 25px rgba(59, 170, 198, 0.25), 0 0 0 8px var(--btn-bg); 
+            background-color: var(--btn-bg); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin-right: 1rem;
+        }
+
+        .jumbotron-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .jumbotron h1 {
+            font-size: 40px;
+            line-height: 48px;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .jumbotron h2 {
+            font-size: 20px;
+            color: var(--accent-secondary);
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .jumbotron p {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        /* Telemetry Badges */
+        .qualities {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .badge {
+            background: var(--btn-bg);
+            color: var(--accent-secondary);
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 9999px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .badge i {
+            font-size: 13px;
+        }
+
+        /* Secciones y Tarjetas */
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-card);
+            padding: 2rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-secondary);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-icon {
+            font-size: 24px;
+            color: var(--accent-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .card p.summary {
+            color: var(--text-muted);
+            font-size: 14px;
+            flex-grow: 1;
+        }
+
+        .click-hint {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--accent-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .hidden-details { display: none; }
+
+        /* GALERÍA DE IMÁGENES */
+        .gallery-container {
+            margin-top: 4rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .gallery-title {
+            font-size: 24px;
+            color: var(--text-main);
+            margin-bottom: 2rem;
+            font-family: var(--font-display);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-card);
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .gallery-card:hover {
+            border-color: var(--accent-secondary);
+        }
+
+        .gallery-img {
+            width: 100%;
+            aspect-ratio: 16 / 9; 
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .gallery-content {
+            padding: 1rem;
+        }
+
+        .gallery-content h4 {
+            font-size: 14px;
+            color: var(--text-main);
+            margin-bottom: 4px;
+            font-family: var(--font-display);
+        }
+
+        .gallery-content p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Modal / Pop-up */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--modal-overlay);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            opacity: 0;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: var(--bg-surface);
+            border: 1px solid var(--accent-secondary);
+            width: 100%;
+            max-width: 700px;
+            border-radius: var(--border-radius-card);
+            padding: 3rem;
+            position: relative;
+            box-shadow: 0 16px 40px -8px rgba(11, 49, 91, 0.16);
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1.5rem; right: 1.5rem;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            width: 32px; height: 32px;
+            font-size: 1rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: flex; justify-content: center; align-items: center;
+        }
+
+        .close-btn:hover {
+            color: var(--accent-secondary);
+            border-color: var(--accent-secondary);
+        }
+
+        .modal-title {
+            font-size: 24px;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .modal-body {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        .modal-body strong {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .modal-body ul { margin-left: 1.5rem; margin-top: 1rem; margin-bottom: 1.5rem; }
+        .modal-body li { margin-bottom: 0.5rem; }
+
+        .cv-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--btn-bg);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            border: 1px solid var(--border-color);
+            margin-top: 1rem;
+            margin-right: 0.5rem;
+        }
+
+        .cv-link-btn:hover {
+            border-color: var(--accent-secondary);
+            color: var(--accent-secondary);
+        }
+
+        /* Contacto */
+        .contact-grid { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+        .contact-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
+            border-radius: var(--border-radius-card);
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-main);
+            min-width: 220px; /* Ajuste para que quepan 4 recuadros */
+            box-shadow: var(--shadow-soft);
+            flex: 1;
+        }
+        .contact-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-secondary);
+            box-shadow: var(--shadow-hover);
+        }
+        .contact-card i { font-size: 2rem; margin-bottom: 1rem; color: var(--accent-secondary); }
+
+        .contact-subtitle {
+            font-size: 12px;
+            margin-top: 8px;
+            opacity: 0.7;
+            font-family: var(--font-mono);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Media Queries */
+        @media (max-width: 900px) {
+            .jumbotron {
+                flex-direction: column-reverse;
+                padding: 2.5rem 2rem;
+                text-align: left;
+                gap: 2rem;
+            }
+            .qualities { justify-content: flex-start; }
+            .jumbotron-image { width: 200px; height: 200px; margin: 0 auto; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; justify-content: flex-start; overflow-x: auto; white-space: nowrap; }
+            .top-bar { padding: 1rem; }
+            .jumbotron h1 { font-size: 28px; line-height: 36px; }
+            main { padding: 1rem; margin-top: 160px; }
+            .modal-content { padding: 1.5rem; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .contact-card { min-width: 100%; }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body class="lang-es">
+
+    <!-- Top Bar & Language Selector -->
+    <div class="top-bar">
+        <a href="#" class="logo">Ibt. <span>FernandoGomez</span></a>
+        <div class="lang-controls">
+            <button class="lang-btn active" onclick="setLanguage('es')">ES</button>
+            <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" onclick="setLanguage('de')">DE</button>
+        </div>
+    </div>
+
+    <!-- Navegación -->
+    <nav class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('inicio')">
+            <span data-lang="es">Inicio</span><span data-lang="en">Home</span><span data-lang="de">Startseite</span>
+        </button>
+        <button class="tab-btn" onclick="switchTab('programacion')">
+            <span data-lang="es">Desarrollo Backend</span><span data-lang="en">Backend Dev</span><span data-lang="de">Backend-Entwicklung</span>
+        </button>
+        <button class="tab-btn" onclick="switchTab('innovacion')">
+            <span data-lang="es">Innovación y Calidad</span><span data-lang="en">Innovation & Quality</span><span data-lang="de">Innovation & Qualität</span>
+        </button>
+        <button class="tab-btn" onclick="switchTab('biotecnologia')">
+            <span data-lang="es">Biotecnología</span><span data-lang="en">Biotechnology</span><span data-lang="de">Biotechnologie</span>
+        </button>
+        <button class="tab-btn" onclick="switchTab('contacto')">
+            <span data-lang="es">Contacto</span><span data-lang="en">Contact</span><span data-lang="de">Kontakt</span>
+        </button>
+    </nav>
+
+    <main>
+        <!-- SECCIÓN: INICIO -->
+        <section id="inicio" class="view-section active">
+            <div class="jumbotron">
+                <div class="jumbotron-text">
+                    <h1>Luis Fernando Mendoza Gómez</h1>
+                    
+                    <h2 data-lang="es">Ingeniero Biotecnólogo y Maestro en Innovación Biotecnológica Farmacéutica</h2>
+                    <h2 data-lang="en">Biotechnological Engineer & Master in Pharmaceutical Biotech Innovation</h2>
+                    <h2 data-lang="de">Biotechnologie-Ingenieur & Master in Pharmazeutischer Biotech-Innovation</h2>
+
+                    <p data-lang="es">
+                        Consultor especialista en desarrollo de productos biotecnológicos, aseguramiento de calidad y escalamiento. Desarrollador backend y arquitecto de software con especialidad en la creación de soluciones LIMS (Laboratory Information Management Systems) y aplicaciones para gestión clínica. Experiencia integral en la gestión del ciclo de vida del producto (I+D, validación, normatividad y comercialización) y especialista en biotecnología celular e ingeniería de tejidos.
+                    </p>
+                    <p data-lang="en">
+                        Consultant specialized in biotech product development, quality assurance, and scaling. Backend developer and software architect specialized in creating LIMS and clinical management applications. Comprehensive experience in product lifecycle management (R&D, validation, regulations, and commercialization) and specialist in cellular biotechnology and tissue engineering.
+                    </p>
+                    <p data-lang="de">
+                        Berater, spezialisiert auf die Entwicklung biotechnologischer Produkte, Qualitätssicherung und Skalierung. Backend-Entwickler und Software-Architekt, spezialisiert auf die Erstellung von LIMS und klinischen Managementanwendungen. Umfassende Erfahrung im Produktlebenszyklus-Management (F&E, Validierung, Vorschriften und Kommerzialisierung) und Spezialist für zelluläre Biotechnologie und Tissue Engineering.
+                    </p>
+
+                    <div class="qualities">
+                        <span class="badge">
+                            <i class="fas fa-microscope"></i>
+                            <span data-lang="es">Biotecnología Aplicada</span>
+                            <span data-lang="en">Applied Biotechnology</span>
+                            <span data-lang="de">Angewandte Biotechnologie</span>
+                        </span>
+
+                        <span class="badge">
+                            <i class="fas fa-server"></i>
+                            <span data-lang="es">Arquitectura Backend</span>
+                            <span data-lang="en">Backend Architecture</span>
+                            <span data-lang="de">Backend-Architektur</span>
+                        </span>
+
+                        <span class="badge">
+                            <i class="fas fa-clipboard-check"></i>
+                            <span data-lang="es">Cumplimiento Regulatorio</span>
+                            <span data-lang="en">Regulatory Compliance</span>
+                            <span data-lang="de">Regulatorische Compliance</span>
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- ESPACIO PARA FOTO -->
+                <div class="jumbotron-image">
+                    <img src="Luis foto.jpg" alt="Foto de Fernando Gómez" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'fas fa-user-tie fa-4x\'></i>';">
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: PROGRAMACIÓN BACKEND -->
+        <section id="programacion" class="view-section">
+            <h2 class="section-title">
+                <span data-lang="es">Desarrollo Backend y Arquitectura TI</span>
+                <span data-lang="en">Backend Development & IT Architecture</span>
+                <span data-lang="de">Backend-Entwicklung & IT-Architektur</span>
+            </h2>
+            <div class="grid-container">
+                <div class="card" onclick="openModal(this)">
+                    <i class="fas fa-code card-icon"></i>
+                    <h3>
+                        <span data-lang="es">Desarrollador Backend & Software</span>
+                        <span data-lang="en">Backend & Software Developer</span>
+                        <span data-lang="de">Backend- & Softwareentwickler</span>
+                    </h3>
+                    <p class="summary" data-lang="es">Especializado en Java, Spring Boot, PostgreSQL, Docker y desarrollo de APIs REST.</p>
+                    <p class="summary" data-lang="en">Specialized in Java, Spring Boot, PostgreSQL, Docker, and REST API development.</p>
+                    <p class="summary" data-lang="de">Spezialisiert auf die Entwicklung mit Java, Spring Boot, PostgreSQL, Docker und REST APIs.</p>
+                    
+                    <span class="click-hint">
+                        <span data-lang="es">Ampliar Información</span>
+                        <span data-lang="en">Expand Info</span>
+                        <span data-lang="de">Details anzeigen</span> 
+                        <i class="fas fa-chevron-right"></i>
+                    </span>
+                    
+                    <div class="hidden-details">
+                        <div data-lang="es">
+                            <p><strong>Stack y Metodologías:</strong></p>
+                            <ul>
+                                <li>Enfoque en Domain-Driven Design (DDD), Arquitectura Hexagonal y Arquitectura por Capas para sistemas SaaS multi-inquilino (multitenant).</li>
+                                <li>Habilidades Clave: Java, Spring Boot, PostgreSQL, APIs REST, Docker, Supabase, Angular, GitHub Copilot, VS Code.</li>
+                                <li>Especialización en Desarrollo de Software Backend & Lógica de Datos - Oracle Next Education (2025).</li>
+                                <li>Certificaciones: Oracle Cloud Infrastructure (OCI) AI Foundations Associate y OCI Foundations Associate (2025).</li>
+                            </ul>
+                            <a href="CV_Backend_Desarrollador.pdf" target="_blank" class="cv-link-btn">
+                                <i class="fas fa-file-pdf"></i> Ver CV (Backend)
+                            </a>
+                            <a href="https://github.com/IBTLuisGomez" target="_blank" class="cv-link-btn">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                        </div>
+                        <div data-lang="en">
+                            <p><strong>Stack and Methodologies:</strong></p>
+                            <ul>
+                                <li>Focus on Domain-Driven Design (DDD), Hexagonal Architecture, and Layered Architecture for multi-tenant SaaS systems.</li>
+                                <li>Key Skills: Java, Spring Boot, PostgreSQL, REST APIs, Docker, Supabase, Angular, GitHub Copilot, VS Code.</li>
+                                <li>Backend Software Development & Data Logic Specialization - Oracle Next Education (2025).</li>
+                                <li>Certifications: Oracle Cloud Infrastructure (OCI) AI Foundations Associate and OCI Foundations Associate (2025).</li>
+                            </ul>
+                            <a href="CV_Backend_Desarrollador.pdf" target="_blank" class="cv-link-btn">
+                                <i class="fas fa-file-pdf"></i> View CV (Backend)
+                            </a>
+                            <a href="https://github.com/IBTLuisGomez" target="_blank" class="cv-link-btn">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                        </div>
+                        <div data-lang="de">
+                            <p><strong>Stack und Methoden:</strong></p>
+                            <ul>
+                                <li>Fokus auf Domain-Driven Design (DDD), Hexagonale Architektur und Schichtenarchitektur für mandantenfähige SaaS-Systeme.</li>
+                                <li>Schlüsselkompetenzen: Java, Spring Boot, PostgreSQL, REST APIs, Docker, Supabase, Angular, GitHub Copilot, VS Code.</li>
+                                <li>Spezialisierung auf Backend-Softwareentwicklung & Datenlogik - Oracle Next Education (2025).</li>
+                                <li>Zertifizierungen: Oracle Cloud Infrastructure (OCI) AI Foundations Associate und OCI Foundations Associate (2025).</li>
+                            </ul>
+                            <a href="CV_Backend_Desarrollador.pdf" target="_blank" class="cv-link-btn">
+                                <i class="fas fa-file-pdf"></i> Lebenslauf ansehen (Backend)
+                            </a>
+                            <a href="https://github.com/IBTLuisGomez" target="_blank" class="cv-link-btn">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" onclick="openModal(this)">
+                    <i class="fas fa-laptop-medical card-icon"></i>
+                    <h3>
+                        <span data-lang="es">Health IT & Sistemas LIMS</span>
+                        <span data-lang="en">Health IT & LIMS Systems</span>
+                        <span data-lang="de">Health IT & LIMS Systeme</span>
+                    </h3>
+                    <p class="summary" data-lang="es">Creación de soluciones LIMS, asegurando trazabilidad, seguridad (HL7 FHIR) e interoperabilidad técnica.</p>
+                    <p class="summary" data-lang="en">Creation of LIMS solutions, ensuring traceability, security (HL7 FHIR), and technical interoperability.</p>
+                    <p class="summary" data-lang="de">Erstellung von LIMS-Lösungen zur Gewährleistung von Rückverfolgbarkeit, Sicherheit (HL7 FHIR) und technischer Interoperabilität.</p>
+
+                    <span class="click-hint">
+                        <span data-lang="es">Ampliar Información</span>
+                        <span data-lang="en">Expand Info</span>
+                        <span data-lang="de">Details anzeigen</span> 
+                        <i class="fas fa-chevron-right"></i>
+                    </span>
+
+                    <div class="hidden-details">
+                        <div data-lang="es">
+                            <p><strong>Proyectos Destacados (NexusLabs.dev & CytoHelix Systems):</strong></p>
+                            <ul>
+                                <li>Diseño de CytoCore, un microservicio LIMS para la trazabilidad de linajes de células madre, construido con Java, Spring Boot, PostgreSQL y Docker.</li>
+                                <li>Diseño de la arquitectura e identidad de KlinikPro y KlinikPro_Recuperat para la administración de clínicas.</li>
+                                <li>Integración de estándares de interoperabilidad médica como HL7 FHIR, HL7v2 y Google Cloud Healthcare API en plataformas de laboratorio.</li>
+                                <li>Análisis de bases de datos estructuradas de métricas operativas mediante herramientas informáticas en Clínicas Recuperat (Mayo 2024-Abril 2025).</li>
+                            </ul>
+                            <a href="CV_Backend_Desarrollador.pdf" target="_blank" class="cv-link-btn">
+                                <i class="fas fa-file-pdf"></i> Ver CV (Backend)
+                            </a>
+                        </div>
+                        <div data-lang="en">
+                            <p><strong>Featured Projects (NexusLabs.dev & CytoHelix Systems):</strong></p>
+                            <ul>
+                                <li>Design of CytoCore, a LIMS microservice for stem cell lineage traceability, built with Java, Spring Boot, PostgreSQL, and Docker.</li>
+                                <li>Architecture and identity design of KlinikPro and KlinikPro_Recuperat for clinic administration.</li>
+                                <li>Integration of medical interoperability standards such as HL7 FHIR, HL7v2, and Google Cloud Healthcare API into laboratory platforms.</li>
+                                <li>Analysis of structured databases of operational metrics using IT tools at Clínicas Recuperat (May 2024-April 2025).</li>
+                            </ul>
+                            <a href="CV_Backend_Desarrollador.pdf" target="_blank" class="cv-link-btn">
+                                <i class="fas fa-file-pdf"></i> View CV (Backend)
+                            </a>
+                        </div>
+                        <div data-lang="de">
+                            <p><strong>Ausgewählte Projekte (NexusLabs.dev & CytoHelix Systems):</strong></p>
+                            <ul>
+                                <li>Design von CytoCore, einem LIMS-Microservice für die Rückverfolgbarkeit von Stammzelllinien, erstellt mit Java, Spring Boot, PostgreSQL und Docker.</li>
+                                <li>Architektur- und Identitätsdesign von KlinikPro und KlinikPro_Recuperat für die Klinikverwaltung.</li>
+                                <li>Integration medizinischer Interoperabilitätsstandards wie HL7 FHIR, HL7v2 und Google Cloud Healthcare API in Laborplattformen.</li>
+                                <li>Analyse strukturierter Datenbanken mit Betriebsmetriken unter Verwendung von IT-Tools bei Clínicas Recuperat (Mai 2024 - April 2025).</li>
+                            </ul>
+                            <a href="CV_Backend_Desarrollador.pdf" target="_blank" class="cv-link-btn">
+                                <i class="fas fa-file-pdf"></i> Lebenslauf ansehen (Backend)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GALERÍA: PROGRAMACIÓN -->
+            <div class="gallery-container">
+                <h3 class="gallery-title">
+                    <span data-lang="es">Archivos de Proyectos</span>
+                    <span data-lang="en">Project Files</span>
+                    <span data-lang="de">Projektdateien</span>
+                </h3>
+                <div class="gallery-grid">
+                    <div class="gallery-card">
+                        <img src="Luis foto.jpg" class="gallery-img" alt="Proyecto 1">
+                        <div class="gallery-content">
+                            <h4><span data-lang="es">CytoCore LIMS</span><span data-lang="en">CytoCore LIMS</span><span data-lang="de">CytoCore LIMS</span></h4>
+                            <p><span data-lang="es">Arquitectura backend para trazabilidad.</span><span data-lang="en">Backend architecture for traceability.</span><span data-lang="de">Backend-Architektur zur Rückverfolgbarkeit.</span></p>
+                        </div>
+                    </div>
+                    <div class="gallery-card">
+                        <img src="Luis foto.jpg" class="gallery-img" alt="Proyecto 2">
+                        <div class="gallery-content">
+                            <h4><span data-lang="es">KlinikPro</span><span data-lang="en">KlinikPro</span><span data-lang="de">KlinikPro</span></h4>
+                            <p><span data-lang="es">Sistema integral de administración clínica.</span><span data-lang="en">Comprehensive clinical management system.</span><span data-lang="de">Umfassendes klinisches Managementsystem.</span></p>
+                        </div>
+                    </div>
+                    <div class="gallery-card">
+                        <img src="Luis foto.jpg" class="gallery-img" alt="Proyecto 3">
+                        <div class="gallery-content">
+                            <h4><span data-lang="es">Integración HL7 FHIR</span><span data-lang="en">HL7 FHIR Integration</span><span data-lang="de">HL7 FHIR Integration</span></h4>
+                            <p><span data-lang="es">API y seguridad de datos de salud.</span><span data-lang="en">API and health data security.</span><span data-lang="de">API und Gesundheitsdatensicherheit.</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: INNOVACIÓN Y CALIDAD -->
+        <section id="innovacion" class="view-section">
+            <h2 class="section-title">
+                <span data-lang="es">Consultoría de Innovación y Desarrollo de Productos</span>
+                <span data-lang="en">Innovation Consulting & Product Development</span>
+                <span data-lang="de">Innovationsberatung & Produktentwicklung</span>
+            </h2>
+            <div class="grid-container">
+                <div class="card" onclick="openModal(this)">
+                    <i class="fas fa-project-diagram card-icon"></i>
+                    <h3>
+                        <span data-lang="es">Gestión I+D y Escalamiento</span>
+                        <span data-lang="en">R&D Management & Scaling</span>
+                        <span data-lang="de">F&E-Management & Skalierung</span>
+                    </h3>
+                    <p class="summary" data-lang="es">Experiencia integral en la gestión del ciclo de vida del producto (I+D, validación, normatividad y comercialización).</p>
+                    <p class="summary" data-lang="en">Comprehensive experience in product lifecycle management (R&D, validation, regulations, and commercialization).</p>
+                    <p class="summary" data-lang="de">Umfassende Erfahrung im Produktlebenszyklus-Management (F&E, Validierung, Vorschriften und Kommerzialisierung).</p>
+
+                    <span class="click-hint">
+                        <span data-lang="es">Ampliar Información</span>
+                        <span data-lang="en">Expand Info</span>
+                        <span data-lang="de">Details anzeigen</span> 
+                        <i class="fas fa-chevron-right"></i>
+                    </span>
+
+                    <div class="hidden-details">
+                        <div data-lang="es">
+                            <p><strong>Experiencia de Liderazgo:</strong></p>
+                            <ul>
+                                <li>Coordinador de Proyectos I+D en CIATEJ (Enero 2022 - Mayo 2024): Liderazgo de proyectos de investigación aplicada en escalamiento de procesos para terapias avanzadas y desarrollo de productos biotecnológicos.</li>
+                                <li>Validación de hipótesis de desarrollo procesando y analizando datos de alta dimensión.</li>
+                                <li>Gerente de Operaciones y Desarrollo de Productos en Farmacias Naturissima (Nov 2018 - Abr 2021): Gestión del ciclo completo de desarrollo de productos nutracéuticos y cosméticos.</li>
+                                <li>Formación en Validación y Modelo de Negocio - Hub Panamericano de Emprendimiento UP (2026).</li>
+                            </ul>
+                            <a href="CV_Consultor_Innovacion.pdf" target="_blank" class="cv-link-btn">
+                                <i class="fas fa-file-pdf"></i> Ver CV (Innovación)
+                            </a>
+                        </div>
+                        <div data-lang="en">
+                            <p><strong>Leadership Experience:</strong></p>
+                            <ul>
+                                <li>R&D Project Coordinator at CIATEJ (Jan 2022 - May 2024): Leadership of applied research projects in process scaling for advanced therapies and biotech product development.</li>
+                                <li>Validation of development hypotheses by processing and analyzing high-dimensional data.</li>
+                                <li>Operations and Product Dev Manager at Farmacias Naturissima (Nov 2018 - Apr 2021): Management of the complete development cycle of nutraceutical and cosmetic products.</li>
+                                <li>Validation and Business Model Training - Hub Panamericano de Emprendimiento UP (2026).</li>
+                            </ul>
+                            <a href="CV_Consultor_Innovacion.pdf" target="_blank" class="cv-link-btn">
+                                <i class="fas fa-file-pdf"></i> View CV (Innovation)
+                            </a>
+                        </div>
+                        <div data-lang="de">
+                            <p><strong>Führungserfahrung:</strong></p>
+                            <ul>
+                                <li>F&E-Projektkoordinator bei CIATEJ (Jan 2022 - Mai 2024): Leitung angewandter Forschungsprojekte zur Prozesskalierung für fortgeschrittene Therapien und biotechnologische Produktentwicklung.</li>
+                                <li>Validierung von Entwicklungshypothesen durch Verarbeitung und Analyse hochdimensionaler Daten.</li>
+                                <li>Leiter Operations und Produktentwicklung bei Farmacias Naturissima (Nov 2018 - Apr 2021): Verwaltung des gesamten Entwicklungszyklus von nutrazeutischen und kosmetischen Produkten.</li>
+                            </ul>
+                            <a href="CV_Consultor_Innovacion.pdf" target="_blank" class="cv-link-btn">
+                                <i class="fas fa-file-pdf"></i> Lebenslauf ansehen (Innovation)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" onclick="openModal(this)">
+                    <i class="fas fa-clipboard-check card-icon"></i>
+                    <h3>
+                        <span data-lang="es">Sistemas de Gestión de Calidad (SGC)</span>
+                        <span data-lang="en">Quality Management Systems (QMS)</span>
+                        <span data-lang="de">Qualitätsmanagementsysteme (QMS)</span>
+                    </h3>
+                    <p class="summary" data-lang="es">Sólida trayectoria implementando Sistemas de Gestión de Calidad (NOM-059, NOM-241), matrices de riesgo (AMFE) y estándares ALCOA+.</p>
+                    <p class="summary" data-lang="en">Solid track record implementing QMS (NOM-059, NOM-241), AMFE risk matrices, and ALCOA+ standards.</p>
+                    <p class="summary" data-lang="de">Solide Erfolgsbilanz bei der Implementierung von QMS (NOM-059, NOM-241), AMFE-Risikomatrizen und ALCOA+-Standards.</p>
+
+                    <span class="click-hint">
+                        <span data-lang="es">Ampliar Información</span>
+                        <span data-lang="en">Expand Info</span>
+                        <span data-lang="de">Details anzeigen</span> 
+                        <i class="fas fa-chevron-right"></i>
+                    </span>
+
+                    <div class="hidden-details">
+                        <div data-lang="es">
+                            <p><strong>Aseguramiento de Calidad:</strong></p>
+                            <ul>
+                                <li>Gerente de SGC y Aseguramiento de Calidad en Xelle Scientific (Abril 2025-Actualidad): Implementación integral del Sistema de Gestión de Calidad (SOPs, matrices AMFE) y dossier regulatorio ante COFEPRIS (NOM-059, NOM-241).</li>
+                                <li>Automatización del cálculo de prioridades de riesgo (IPR) mediante matrices cuantitativas, logrando trazabilidad total de registros históricos.</li>
+                            </ul>
+                            <a href="CV_Consultor_Innovacion.pdf" target="_blank" class="cv-link-btn">
+                                <i class="fas fa-file-pdf"></i> Ver CV (Calidad)
+                            </a>
+                        </div>
+                        <div data-lang="en">
+                            <p><strong>Quality Assurance:</strong></p>
+                            <ul>
+                                <li>QMS & Quality Assurance Manager at Xelle Scientific (April 2025-Present): Comprehensive implementation of the Quality Management System (SOPs, AMFE matrices) and regulatory dossier for COFEPRIS (NOM-059, NOM-241).</li>
+                                <li>Automation of risk priority calculation (IPR) using quantitative matrices, achieving total traceability of historical records.</li>
+                            </ul>
+                            <a href="CV_Consultor_Innovacion.pdf" target="_blank" class="cv-link-btn">
+                                <i class="fas fa-file-pdf"></i> View CV (Quality)
+                            </a>
+                        </div>
+                        <div data-lang="de">
+                            <p><strong>Qualitätssicherung:</strong></p>
+                            <ul>
+                                <li>QMS & Quality Assurance Manager bei Xelle Scientific (April 2025 - heute): Umfassende Implementierung des Qualitätsmanagementsystems (SOPs, AMFE-Matrizen) und regulatorisches Dossier für COFEPRIS (NOM-059, NOM-241).</li>
+                                <li>Automatisierung der Risikoprioritätsberechnung (IPR) mittels quantitativer Matrizen zur vollständigen Rückverfolgbarkeit historischer Aufzeichnungen.</li>
+                            </ul>
+                            <a href="CV_Consultor_Innovacion.pdf" target="_blank" class="cv-link-btn">
+                                <i class="fas fa-file-pdf"></i> Lebenslauf ansehen (Qualität)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GALERÍA: INNOVACIÓN -->
+            <div class="gallery-container">
+                <h3 class="gallery-title">
+                    <span data-lang="es">Registros y Auditorías</span>
+                    <span data-lang="en">Records and Audits</span>
+                    <span data-lang="de">Aufzeichnungen und Audits</span>
+                </h3>
+                <div class="gallery-grid">
+                    <div class="gallery-card">
+                        <img src="Luis foto.jpg" class="gallery-img" alt="Documento 1">
+                        <div class="gallery-content">
+                            <h4><span data-lang="es">Auditorías COFEPRIS</span><span data-lang="en">COFEPRIS Audits</span><span data-lang="de">COFEPRIS Audits</span></h4>
+                            <p><span data-lang="es">Dossier y cumplimiento.</span><span data-lang="en">Dossier and compliance.</span><span data-lang="de">Dossier und Compliance.</span></p>
+                        </div>
+                    </div>
+                    <div class="gallery-card">
+                        <img src="Luis foto.jpg" class="gallery-img" alt="Documento 2">
+                        <div class="gallery-content">
+                            <h4><span data-lang="es">Matrices AMFE</span><span data-lang="en">AMFE Matrices</span><span data-lang="de">AMFE Matrizen</span></h4>
+                            <p><span data-lang="es">Cálculo automatizado de riesgos.</span><span data-lang="en">Automated risk calculation.</span><span data-lang="de">Automatisierte Risikoberechnung.</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: BIOTECNOLOGÍA -->
+        <section id="biotecnologia" class="view-section">
+            <h2 class="section-title">
+                <span data-lang="es">Biotecnología y Cultivo Celular</span>
+                <span data-lang="en">Biotechnology & Cell Culture</span>
+                <span data-lang="de">Biotechnologie & Zellkultur</span>
+            </h2>
+            <div class="grid-container">
+                <div class="card" onclick="openModal(this)">
+                    <i class="fas fa-dna card-icon"></i>
+                    <h3>
+                        <span data-lang="es">Especialista en Cultivo Celular</span>
+                        <span data-lang="en">Cell Culture Specialist</span>
+                        <span data-lang="de">Zellkultur-Spezialist</span>
+                    </h3>
+                    <p class="summary" data-lang="es">Experiencia avanzada en aislamiento, expansión, criopreservación y diferenciación de líneas celulares humanas.</p>
+                    <p class="summary" data-lang="en">Advanced experience in isolation, expansion, cryopreservation, and differentiation of human cell lines.</p>
+                    <p class="summary" data-lang="de">Fortgeschrittene Erfahrung in Isolierung, Expansion, Kryokonservierung und Differenzierung humaner Zelllinien.</p>
+
+                    <span class="click-hint">
+                        <span data-lang="es">Ampliar Información</span>
+                        <span data-lang="en">Expand Info</span>
+                        <span data-lang="de">Details anzeigen</span> 
+                        <i class="fas fa-chevron-right"></i>
+                    </span>
+
+                    <div class="hidden-details">
+                        <div data-lang="es">
+                            <p><strong>Biología Celular:</strong></p>
+                            <ul>
+                                <li>Manejo de Células Madre Mesenquimales (CMM), progenitores neurales y células embrionarias.</li>
+                                <li>Especialista en Cultivo Celular en Xelle Scientific (Abril 2025-Actualidad): Supervisión de protocolos de aislamiento, expansión y criopreservación de CMM. Garantía de viabilidad óptima y bioseguridad en el almacenamiento de dosis terapéuticas.</li>
+                                <li>Investigador de Posgrado en CIATEJ (Enero 2022-Mayo 2024): Liderazgo en proyectos de diferenciación celular y escalamiento en biorreactores para terapias celulares avanzadas.</li>
+                                <li>Sólido dominio técnico en el mantenimiento de protocolos BSL-2.</li>
+                            </ul>
+                            <a href="CV_Biotecnologia_Cultivo.pdf" target="_blank" class="cv-link-btn">
+                                <i class="fas fa-file-pdf"></i> Ver CV (Cultivo Celular)
+                            </a>
+                        </div>
+                        <div data-lang="en">
+                            <p><strong>Cellular Biology:</strong></p>
+                            <ul>
+                                <li>Handling of Mesenchymal Stem Cells (MSC), neural progenitors, and embryonic cells.</li>
+                                <li>Cell Culture Specialist at Xelle Scientific (April 2025-Present): Supervision of isolation, expansion, and cryopreservation protocols for MSCs. Ensuring optimal viability and biosafety in therapeutic dose storage.</li>
+                                <li>Graduate Researcher at CIATEJ (Jan 2022-May 2024): Leadership in cell differentiation projects and bioreactor scaling for advanced cellular therapies.</li>
+                                <li>Solid technical mastery in maintaining BSL-2 protocols.</li>
+                            </ul>
+                            <a href="CV_Biotecnologia_Cultivo.pdf" target="_blank" class="cv-link-btn">
+                                <i class="fas fa-file-pdf"></i> View CV (Cell Culture)
+                            </a>
+                        </div>
+                        <div data-lang="de">
+                            <p><strong>Zellbiologie:</strong></p>
+                            <ul>
+                                <li>Umgang mit mesenchymalen Stammzellen (MSC), neuronalen Vorläuferzellen und embryonalen Zellen.</li>
+                                <li>Zellkulturspezialist bei Xelle Scientific (April 2025 - heute): Überwachung von Isolierungs-, Expansions- und Kryokonservierungsprotokollen für MSCs. Gewährleistung optimaler Lebensfähigkeit und Biosicherheit bei der Lagerung therapeutischer Dosen.</li>
+                                <li>Solides technisches Know-how in der Aufrechterhaltung von BSL-2-Protokollen.</li>
+                            </ul>
+                            <a href="CV_Biotecnologia_Cultivo.pdf" target="_blank" class="cv-link-btn">
+                                <i class="fas fa-file-pdf"></i> Lebenslauf ansehen (Zellkultur)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" onclick="openModal(this)">
+                    <i class="fas fa-vial card-icon"></i>
+                    <h3>
+                        <span data-lang="es">Biología Molecular e Investigación</span>
+                        <span data-lang="en">Molecular Biology & Research</span>
+                        <span data-lang="de">Molekularbiologie & Forschung</span>
+                    </h3>
+                    <p class="summary" data-lang="es">Operación de equipos complejos, espectroscopia RAMAN, y obtención de patentes en construcciones genéticas.</p>
+                    <p class="summary" data-lang="en">Operation of complex equipment, RAMAN spectroscopy, and patents in genetic constructs.</p>
+                    <p class="summary" data-lang="de">Betrieb komplexer Geräte, RAMAN-Spektroskopie und Patente auf genetische Konstrukte.</p>
+
+                    <span class="click-hint">
+                        <span data-lang="es">Ampliar Información</span>
+                        <span data-lang="en">Expand Info</span>
+                        <span data-lang="de">Details anzeigen</span> 
+                        <i class="fas fa-chevron-right"></i>
+                    </span>
+
+                    <div class="hidden-details">
+                        <div data-lang="es">
+                            <p><strong>Investigación Aplicada y Patentes:</strong></p>
+                            <ul>
+                                <li>Operación de citometría de flujo, espectroscopia RAMAN y microscopía de fluorescencia para evaluar pluripotencia celular.</li>
+                                <li>Investigador de Pregrado en CIATEJ (Feb 2018 - Nov 2018): Ejecución de técnicas avanzadas de biología molecular (PCR, Golden Gate, transformación de plásmidos) para el diseño in silico y construcción de vacunas.</li>
+                                <li><strong>Patente:</strong> Obtención de patente industrial como coinventor por el desarrollo de construcciones genéticas.</li>
+                                <li><strong>Tesis e Investigación:</strong> Tesis de Maestría en Ciencias en Innovación Biotecnológica desarrollada en el CIATEJ (2024).</li>
+                            </ul>
+                            <a href="CV_Biotecnologia_Cultivo.pdf" target="_blank" class="cv-link-btn">
+                                <i class="fas fa-file-pdf"></i> Ver CV (Biología Molecular)
+                            </a>
+                        </div>
+                        <div data-lang="en">
+                            <p><strong>Applied Research and Patents:</strong></p>
+                            <ul>
+                                <li>Operation of flow cytometry, RAMAN spectroscopy, and fluorescence microscopy to evaluate cellular pluripotency.</li>
+                                <li>Undergraduate Researcher at CIATEJ (Feb 2018 - Nov 2018): Execution of advanced molecular biology techniques (PCR, Golden Gate, plasmid transformation) for in silico design and vaccine construction.</li>
+                                <li><strong>Patent:</strong> Obtained an industrial patent as a co-inventor for the development of genetic constructs.</li>
+                                <li><strong>Thesis & Research:</strong> Master's Thesis in Pharmaceutical Biotech Innovation developed at CIATEJ (2024).</li>
+                            </ul>
+                            <a href="CV_Biotecnologia_Cultivo.pdf" target="_blank" class="cv-link-btn">
+                                <i class="fas fa-file-pdf"></i> View CV (Molecular Biology)
+                            </a>
+                        </div>
+                        <div data-lang="de">
+                            <p><strong>Angewandte Forschung und Patente:</strong></p>
+                            <ul>
+                                <li>Betrieb von Durchflusszytometrie, RAMAN-Spektroskopie und Fluoreszenzmikroskopie zur Bewertung der zellulären Pluripotenz.</li>
+                                <li>Undergraduate Researcher bei CIATEJ (Feb 2018 - Nov 2018): Ausführung fortgeschrittener molekularbiologischer Techniken.</li>
+                                <li><strong>Patent:</strong> Erhalt eines Industriepatents als Miterfinder für die Entwicklung genetischer Konstrukte.</li>
+                                <li><strong>Thesis:</strong> Masterarbeit in Pharmazeutischer Biotech-Innovation (CIATEJ, 2024).</li>
+                            </ul>
+                            <a href="CV_Biotecnologia_Cultivo.pdf" target="_blank" class="cv-link-btn">
+                                <i class="fas fa-file-pdf"></i> Lebenslauf ansehen (Molekularbiologie)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GALERÍA: BIOTECNOLOGÍA -->
+            <div class="gallery-container">
+                <h3 class="gallery-title">
+                    <span data-lang="es">Galería de Investigación y Cultivos</span>
+                    <span data-lang="en">Research & Cell Culture Gallery</span>
+                    <span data-lang="de">Galerie für Forschung & Zellkulturen</span>
+                </h3>
+                <div class="gallery-grid">
+                    <div class="gallery-card">
+                        <img src="Luis foto.jpg" class="gallery-img" alt="Investigación 1">
+                        <div class="gallery-content">
+                            <h4><span data-lang="es">Cultivos CMM</span><span data-lang="en">MSC Cultures</span><span data-lang="de">MSC Kulturen</span></h4>
+                            <p><span data-lang="es">Expansión y mantenimiento.</span><span data-lang="en">Expansion and maintenance.</span><span data-lang="de">Expansion und Erhaltung.</span></p>
+                        </div>
+                    </div>
+                    <div class="gallery-card">
+                        <img src="Luis foto.jpg" class="gallery-img" alt="Investigación 2">
+                        <div class="gallery-content">
+                            <h4><span data-lang="es">Espectroscopia RAMAN</span><span data-lang="en">RAMAN Spectroscopy</span><span data-lang="de">RAMAN Spektroskopie</span></h4>
+                            <p><span data-lang="es">Evaluación analítica celular.</span><span data-lang="en">Cellular analytical evaluation.</span><span data-lang="de">Zellanalytische Auswertung.</span></p>
+                        </div>
+                    </div>
+                    <div class="gallery-card">
+                        <img src="Luis foto.jpg" class="gallery-img" alt="Investigación 3">
+                        <div class="gallery-content">
+                            <h4><span data-lang="es">Patentes y Artículos</span><span data-lang="en">Patents and Articles</span><span data-lang="de">Patente und Artikel</span></h4>
+                            <p><span data-lang="es">Construcciones Genéticas.</span><span data-lang="en">Genetic Constructs.</span><span data-lang="de">Genetische Konstrukte.</span></p>
+                        </div>
+                    </div>
+                    <div class="gallery-card">
+                        <img src="Luis foto.jpg" class="gallery-img" alt="Investigación 4">
+                        <div class="gallery-content">
+                            <h4><span data-lang="es">Entornos BSL-2</span><span data-lang="en">BSL-2 Environments</span><span data-lang="de">BSL-2 Umgebungen</span></h4>
+                            <p><span data-lang="es">Operación y bioseguridad.</span><span data-lang="en">Operation and biosafety.</span><span data-lang="de">Betrieb und Biosicherheit.</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: CONTACTO -->
+        <section id="contacto" class="view-section">
+            <h2 class="section-title">
+                <span data-lang="es">Contacto e Integración</span>
+                <span data-lang="en">Contact & Integration</span>
+                <span data-lang="de">Kontakt & Integration</span>
+            </h2>
+            <div class="contact-grid">
+                <!-- Botón: Enviar Correo (Abre el cliente de correo) -->
+                <a href="mailto:ibt.fernandogomez@gmail.com" class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p data-lang="es">Enviar correo</p>
+                    <p data-lang="en">Send email</p>
+                    <p data-lang="de">E-Mail senden</p>
+                    <p class="contact-subtitle">ibt.fernandogomez@gmail.com</p>
+                </a>
+                
+                <!-- Botón: WhatsApp (Abre chat directamente) -->
+                <a href="https://wa.me/523312318120" class="contact-card" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    <h3>WhatsApp</h3>
+                    <p data-lang="es">Enviar mensaje</p>
+                    <p data-lang="en">Send message</p>
+                    <p data-lang="de">Nachricht senden</p>
+                    <p class="contact-subtitle">+52 331 231 8120</p>
+                </a>
+                
+                <!-- Botón: GitHub -->
+                <a href="https://github.com/IBTLuisGomez" class="contact-card" target="_blank">
+                    <i class="fab fa-github"></i>
+                    <h3>GitHub</h3>
+                    <p data-lang="es">Visitar Repositorios</p>
+                    <p data-lang="en">Visit Repositories</p>
+                    <p data-lang="de">Repositories ansehen</p>
+                    <p class="contact-subtitle">@IBTLuisGomez</p>
+                </a>
+
+                <!-- Botón: LinkedIn -->
+                <a href="https://www.linkedin.com/in/mscfernandogomez/" class="contact-card" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                    <h3>LinkedIn</h3>
+                    <p data-lang="es">Conectar Profesionalmente</p>
+                    <p data-lang="en">Connect Professionally</p>
+                    <p data-lang="de">Professionell vernetzen</p>
+                    <p class="contact-subtitle">in/mscfernandogomez</p>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal Base (Atmospheric Glassmorphism) -->
+    <div class="modal-overlay" id="detailModal" onclick="closeModalOnOutsideClick(event)">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <h2 class="modal-title" id="modalTitle">Title</h2>
+            <div class="modal-body" id="modalBody">
+                <!-- Inyectado por JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Lógica de navegación entre pestañas
+        function switchTab(tabId) {
+            document.querySelectorAll('.view-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Sistema de Idioma
+        function setLanguage(lang) {
+            document.body.className = `lang-${lang}`;
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if(btn.innerText.toLowerCase() === lang) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            const modal = document.getElementById('detailModal');
+            if(modal.classList.contains('show') && currentCardElement) {
+                updateModalContent(currentCardElement, lang);
+            }
+        }
+
+        // Lógica del Modal
+        let currentCardElement = null;
+
+        function openModal(cardElement) {
+            currentCardElement = cardElement;
+            const currentLang = document.body.className.split('-')[1] || 'es'; 
+            updateModalContent(cardElement, currentLang);
+            
+            const modal = document.getElementById('detailModal');
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function updateModalContent(cardElement, lang) {
+            const titleSpan = cardElement.querySelector(`h3 span[data-lang="${lang}"]`);
+            const title = titleSpan ? titleSpan.innerText : cardElement.querySelector('h3').innerText;
+            
+            const detailsDiv = cardElement.querySelector(`.hidden-details div[data-lang="${lang}"]`);
+            const detailsHtml = detailsDiv ? detailsDiv.innerHTML : cardElement.querySelector('.hidden-details').innerHTML;
+
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalBody').innerHTML = detailsHtml;
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('detailModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+            currentCardElement = null;
+        }
+
+        function closeModalOnOutsideClick(event) {
+            const modal = document.getElementById('detailModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
