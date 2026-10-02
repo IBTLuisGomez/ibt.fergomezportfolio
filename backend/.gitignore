@@ -1,0 +1,10 @@
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+# IDE
+.idea/
+*.iml
+.vscode/
+# Secretos / configuración local
+.env
+src/main/resources/application-local.yml

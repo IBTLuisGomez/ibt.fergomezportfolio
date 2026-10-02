@@ -10,7 +10,7 @@
     <meta property="og:type" content="profile">
     <meta property="og:title" content="Luis Fernando Mendoza Gómez | Biotecnología × Backend">
     <meta property="og:description" content="Biotecnología celular, sistemas de calidad y arquitectura backend (Java · Spring Boot · LIMS).">
-    <meta property="og:image" content="luis-foto.jpg">
+    <meta property="og:image" content="img/perfil/luis-foto.jpg">
     <meta property="og:locale" content="es_MX">
     <meta name="twitter:card" content="summary">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b315b'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='28' font-weight='700' fill='%236dd4f1' text-anchor='middle'%3EFG%3C/text%3E%3C/svg%3E">
@@ -20,618 +20,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
-    <style>
-        /* Variables Globales - MODO CLARO "Precision Bio-Digital" */
-        :root {
-            --bg-base: #f7f9ff;
-            --bg-surface: #ffffff;
-            --bg-nav: rgba(247, 249, 255, 0.95);
-            --text-main: #081d2c;
-            --text-muted: #5c6f81;
-            --accent-primary: #0b315b;
-            --accent-secondary: #3baac6;
-            --border-color: #b0c4d9;
-            --shadow-soft: 0 4px 6px -1px rgba(11, 49, 91, 0.05);
-            --shadow-hover: 0 8px 24px -4px rgba(11, 49, 91, 0.08);
-            --modal-overlay: rgba(31, 50, 66, 0.6);
-            --btn-bg: #e7f2ff;
-            --btn-hover: #d1e5fa;
-            --font-display: 'Plus Jakarta Sans', sans-serif;
-            --font-body: 'Inter', sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
-            --border-radius: 4px;
-            --border-radius-card: 8px;
-        }
-
-        /* Auto Modo Oscuro - "Nexus Precision Engineering" */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-base: #0d141d;
-                --bg-surface: #151c25;
-                --bg-nav: rgba(13, 20, 29, 0.9);
-                --text-main: #dce3f0;
-                --text-muted: #879397;
-                --accent-primary: #6dd4f1;
-                --accent-secondary: #3baac6;
-                --border-color: #3e484c;
-                --shadow-soft: 0 4px 10px rgba(0, 0, 0, 0.4);
-                --shadow-hover: 0 8px 32px -4px rgba(11, 49, 91, 0.5), 0 0 16px -2px rgba(59, 170, 198, 0.25);
-                --modal-overlay: rgba(7, 16, 24, 0.9);
-                --btn-bg: rgba(11, 49, 91, 0.35);
-                --btn-hover: #19202a;
-            }
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        body {
-            background-color: var(--bg-base);
-            color: var(--text-main);
-            font-family: var(--font-body);
-            font-size: 15px;
-            line-height: 1.6;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3, h4, .logo {
-            font-family: var(--font-display);
-        }
-
-        /* Sistema Multi-idioma CSS */
-        [data-lang] { display: none; }
-        body.lang-es [data-lang="es"] { display: block; }
-        body.lang-en [data-lang="en"] { display: block; }
-        body.lang-de [data-lang="de"] { display: block; }
-        
-        body.lang-es span[data-lang="es"],
-        body.lang-en span[data-lang="en"],
-        body.lang-de span[data-lang="de"] { display: inline; }
-
-        /* Barra de Navegación superior */
-        .top-bar {
-            position: fixed;
-            top: 0; width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2.5rem;
-            background: var(--bg-nav);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-decoration: none;
-            color: var(--text-main);
-            letter-spacing: -0.02em;
-        }
-
-        .logo span {
-            color: var(--accent-secondary);
-        }
-
-        .lang-controls {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .lang-btn {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
-            padding: 4px 10px;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            font-family: var(--font-mono);
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .lang-btn:hover, .lang-btn.active {
-            border-color: var(--accent-secondary);
-            color: var(--accent-secondary);
-            background-color: var(--btn-bg);
-        }
-
-        /* Navegación por pestañas */
-        .nav-tabs {
-            position: fixed;
-            top: 65px; width: 100%;
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 1rem;
-            background: linear-gradient(to bottom, var(--bg-base) 85%, transparent);
-            z-index: 999;
-        }
-
-        .tab-btn {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
-            padding: 8px 16px;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 500;
-            font-family: var(--font-body);
-        }
-
-        .tab-btn:hover, .tab-btn.active {
-            background: var(--accent-secondary);
-            color: #ffffff;
-            border-color: var(--accent-secondary);
-        }
-        @media (prefers-color-scheme: dark) {
-            .tab-btn:hover, .tab-btn.active { color: #003641; }
-        }
-
-        /* Contenedor Principal */
-        main {
-            margin-top: 150px;
-            padding: 2.5rem;
-            display: flex;
-            justify-content: center;
-        }
-
-        .view-section {
-            display: none;
-            width: 100%;
-            max-width: 1280px;
-            animation: fadeIn 0.4s ease-out forwards;
-        }
-
-        .view-section.active {
-            display: block;
-        }
-
-        /* Jumbotron Bio-Digital */
-        .jumbotron {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 4rem;
-            box-shadow: var(--shadow-soft);
-            display: flex;
-            align-items: center;
-            gap: 4rem;
-        }
-
-        .jumbotron-text {
-            flex: 1;
-        }
-
-        /* Diseño de Foto */
-        .jumbotron-image {
-            flex-shrink: 0;
-            width: 260px;
-            height: 260px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 2px solid var(--accent-secondary);
-            box-shadow: 0 0 25px rgba(59, 170, 198, 0.25), 0 0 0 8px var(--btn-bg); 
-            background-color: var(--btn-bg); 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            margin-right: 1rem;
-        }
-
-        .jumbotron-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .jumbotron h1 {
-            font-size: 40px;
-            line-height: 48px;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.5rem;
-            color: var(--text-main);
-        }
-
-        .jumbotron h2 {
-            font-size: 20px;
-            color: var(--accent-secondary);
-            font-weight: 600;
-            margin-bottom: 2rem;
-        }
-
-        .jumbotron p {
-            font-size: 15px;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            text-align: justify;
-        }
-
-        /* Telemetry Badges */
-        .qualities {
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-
-        .badge {
-            background: var(--btn-bg);
-            color: var(--accent-secondary);
-            border: 1px solid var(--border-color);
-            padding: 6px 14px;
-            border-radius: 9999px;
-            font-family: var(--font-mono);
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .badge i {
-            font-size: 13px;
-        }
-
-        /* Secciones y Tarjetas */
-        .section-title {
-            font-size: 32px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 2.5rem;
-            color: var(--text-main);
-            letter-spacing: -0.02em;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius-card);
-            padding: 2rem;
-            cursor: pointer;
-            box-shadow: var(--shadow-soft);
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent-secondary);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .card-icon {
-            font-size: 24px;
-            color: var(--accent-secondary);
-            margin-bottom: 1.5rem;
-        }
-
-        .card h3 {
-            font-size: 20px;
-            margin-bottom: 1rem;
-            color: var(--text-main);
-        }
-
-        .card p.summary {
-            color: var(--text-muted);
-            font-size: 14px;
-            flex-grow: 1;
-        }
-
-        .click-hint {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-            font-family: var(--font-mono);
-            font-size: 11px;
-            color: var(--accent-secondary);
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .hidden-details { display: none; }
-        /* Showcase de proyectos */
-        .section-intro { text-align: center; color: var(--text-muted); max-width: 720px; margin: -1rem auto 2.5rem; }
-        .showcase-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
-        .card.showcase-card { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
-        .showcase-cover { position: relative; aspect-ratio: 16 / 10; overflow: hidden; border-bottom: 1px solid var(--border-color); background: var(--btn-bg); }
-        .showcase-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
-        .showcase-card:hover .showcase-cover img { transform: scale(1.03); }
-        .status-pill { position: absolute; top: 12px; left: 12px; font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; background: var(--bg-surface); color: var(--accent-primary); border: 1px solid var(--accent-secondary); }
-        .showcase-body { padding: 1.25rem 1.5rem 1.5rem; display: flex; flex-direction: column; gap: .5rem; flex: 1; }
-        .showcase-body .click-hint { margin-top: auto; }
-        .tech-row { display: flex; flex-wrap: wrap; gap: 6px; margin: .5rem 0; }
-        .tech-chip { font-family: var(--font-mono); font-size: 11px; padding: 2px 8px; border-radius: 4px; background: var(--btn-bg); color: var(--text-main); border: 1px solid var(--border-color); }
-        .showcase-gallery { display: grid; gap: 1rem; margin-top: 1rem; }
-        .showcase-full { width: 100%; height: auto; border-radius: var(--border-radius-card); border: 1px solid var(--border-color); }
-        .showcase-note { font-size: 12px; color: var(--text-muted); font-style: italic; margin-top: .5rem; }
-        .ba-carousel { margin-top: 1rem; border: 1px solid var(--border-color); border-radius: var(--border-radius-card); padding: .75rem; background: var(--btn-bg); }
-        .ba-nav { display: flex; align-items: center; justify-content: center; gap: .75rem; margin: -.75rem -.75rem .75rem; padding: .6rem .75rem; position: sticky; top: -1px; z-index: 2; background: var(--btn-bg); border-bottom: 1px solid var(--border-color); border-radius: var(--border-radius-card) var(--border-radius-card) 0 0; }
-        .ba-tabs { display: inline-flex; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 999px; padding: 3px; }
-        .ba-dot { border: 0; background: transparent; color: var(--text-muted); font: 600 12px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; padding: 6px 16px; border-radius: 999px; cursor: pointer; transition: background .2s, color .2s; }
-        .ba-dot.active { background: var(--accent-primary); color: #fff; }
-        .ba-arrow { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--border-color); background: var(--bg-surface); color: var(--text-main); cursor: pointer; display: grid; place-items: center; transition: border-color .2s, color .2s; }
-        .ba-arrow:hover, .ba-arrow:focus-visible { border-color: var(--accent-primary); color: var(--accent-primary); }
-        .ba-slide { display: none; position: relative; margin: 0; }
-        .ba-slide.active { display: block; animation: baFade .35s ease; }
-        @keyframes baFade { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: none; } }
-        .ba-slide img { display: block; }
-        .ba-tag { position: absolute; bottom: 10px; right: 10px; z-index: 1; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; color: #fff; }
-        .ba-before { background: #64748b; } .ba-after { background: var(--accent-primary); }
-        .ba-counter { text-align: center; font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin: .5rem 0 0; }
-        .cert-block { margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid var(--border-color); }
-        .cert-heading { font-size: 1.4rem; display: flex; align-items: center; gap: .6rem; color: var(--text-main); margin-bottom: 1.25rem; }
-        .cert-heading i, .cert-list h5 i { color: var(--accent-primary); }
-        .oracle-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; }
-        .oracle-cert { display: flex; flex-direction: column; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--border-radius-card); overflow: hidden; transition: border-color .2s, transform .2s; }
-        .oracle-cert:hover { border-color: #c74634; transform: translateY(-3px); }
-        .oracle-img img { width: 100%; aspect-ratio: 1760 / 1360; object-fit: cover; display: block; border-bottom: 1px solid var(--border-color); background: #fff; }
-        .oracle-body { padding: 1rem 1.25rem 1.25rem; display: flex; flex-direction: column; gap: .4rem; }
-        .oracle-issuer { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #c74634; }
-        .oracle-body h4 { font-size: 1rem; line-height: 1.35; color: var(--text-main); margin: 0; }
-        .oracle-meta { font-size: 12px; color: var(--text-muted); margin: 0; }
-        .oracle-links { display: flex; flex-wrap: wrap; gap: .5rem 1rem; margin-top: .35rem; }
-        .oracle-links a { font-size: 13px; font-weight: 600; color: var(--accent-primary); text-decoration: none; display: inline-flex; align-items: center; gap: .35rem; }
-        .oracle-links a:hover { text-decoration: underline; }
-        .cert-sub { margin: 2.25rem 0 1rem; font-size: 1.05rem; display: flex; align-items: center; gap: .5rem; color: var(--text-main); }
-        .cert-count { font-family: var(--font-mono); font-size: 11px; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--border-color); color: var(--text-muted); }
-        .cert-lists { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
-        .cert-list { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--border-radius-card); padding: 1rem 1.1rem; }
-        .cert-list h5 { font-size: .95rem; margin: 0 0 .6rem; display: flex; align-items: center; gap: .45rem; color: var(--text-main); }
-        .cert-list ul { list-style: none; margin: 0; padding: 0; }
-        .cert-list li { display: flex; justify-content: space-between; gap: .75rem; padding: .4rem 0; border-top: 1px dashed var(--border-color); font-size: 13px; line-height: 1.35; }
-        .cert-list li:first-child { border-top: 0; }
-        .cert-list li a { color: var(--text-main); text-decoration: none; }
-        .cert-list li a:hover { color: var(--accent-primary); text-decoration: underline; }
-        .cert-list li span { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); white-space: nowrap; }
-        .modal-content.wide { max-width: 1000px; }
-
-
-        /* GALERÍA DE IMÁGENES */
-        .gallery-container {
-            margin-top: 4rem;
-            padding-top: 2.5rem;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .gallery-title {
-            font-size: 24px;
-            color: var(--text-main);
-            margin-bottom: 2rem;
-            font-family: var(--font-display);
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .gallery-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius-card);
-            overflow: hidden;
-            box-shadow: var(--shadow-soft);
-        }
-
-        .gallery-card:hover {
-            border-color: var(--accent-secondary);
-        }
-
-        .gallery-img {
-            width: 100%;
-            aspect-ratio: 16 / 9; 
-            object-fit: cover;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .gallery-placeholder {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.25rem;
-            color: var(--accent-secondary);
-            background: linear-gradient(135deg, var(--btn-bg), var(--bg-surface));
-        }
-
-        .card:focus-visible, .tab-btn:focus-visible, .lang-btn:focus-visible {
-            outline: 2px solid var(--accent-secondary);
-            outline-offset: 2px;
-        }
-
-        .gallery-content {
-            padding: 1rem;
-        }
-
-        .gallery-content h4 {
-            font-size: 14px;
-            color: var(--text-main);
-            margin-bottom: 4px;
-            font-family: var(--font-display);
-        }
-
-        .gallery-content p {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        /* Modal / Pop-up */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--modal-overlay);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-            opacity: 0;
-        }
-
-        .modal-overlay.show {
-            display: flex;
-            opacity: 1;
-        }
-
-        .modal-content {
-            background: var(--bg-surface);
-            border: 1px solid var(--accent-secondary);
-            width: 100%;
-            max-width: 700px;
-            border-radius: var(--border-radius-card);
-            padding: 3rem;
-            position: relative;
-            box-shadow: 0 16px 40px -8px rgba(11, 49, 91, 0.16);
-            max-height: 85vh;
-            overflow-y: auto;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 1.5rem; right: 1.5rem;
-            background: transparent;
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            width: 32px; height: 32px;
-            font-size: 1rem;
-            color: var(--text-muted);
-            cursor: pointer;
-            display: flex; justify-content: center; align-items: center;
-        }
-
-        .close-btn:hover {
-            color: var(--accent-secondary);
-            border-color: var(--accent-secondary);
-        }
-
-        .modal-title {
-            font-size: 24px;
-            color: var(--text-main);
-            margin-bottom: 1rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 1rem;
-        }
-
-        .modal-body {
-            color: var(--text-muted);
-            font-size: 15px;
-        }
-
-        .modal-body strong {
-            color: var(--text-main);
-            font-weight: 600;
-        }
-
-        .modal-body ul { margin-left: 1.5rem; margin-top: 1rem; margin-bottom: 1.5rem; }
-        .modal-body li { margin-bottom: 0.5rem; }
-
-        .cv-link-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background-color: var(--btn-bg);
-            color: var(--text-main);
-            padding: 8px 16px;
-            border-radius: var(--border-radius);
-            text-decoration: none;
-            font-family: var(--font-mono);
-            font-size: 12px;
-            border: 1px solid var(--border-color);
-            margin-top: 1rem;
-            margin-right: 0.5rem;
-        }
-
-        .cv-link-btn:hover {
-            border-color: var(--accent-secondary);
-            color: var(--accent-secondary);
-        }
-
-        /* Contacto */
-        .contact-grid { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
-        .contact-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            padding: 2.5rem;
-            border-radius: var(--border-radius-card);
-            text-align: center;
-            text-decoration: none;
-            color: var(--text-main);
-            min-width: 220px; /* Ajuste para que quepan 4 recuadros */
-            box-shadow: var(--shadow-soft);
-            flex: 1;
-        }
-        .contact-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent-secondary);
-            box-shadow: var(--shadow-hover);
-        }
-        .contact-card i { font-size: 2rem; margin-bottom: 1rem; color: var(--accent-secondary); }
-
-        .contact-subtitle {
-            font-size: 12px;
-            margin-top: 8px;
-            opacity: 0.7;
-            font-family: var(--font-mono);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Responsive Media Queries */
-        @media (max-width: 900px) {
-            .jumbotron {
-                flex-direction: column-reverse;
-                padding: 2.5rem 2rem;
-                text-align: left;
-                gap: 2rem;
-            }
-            .qualities { justify-content: flex-start; }
-            .jumbotron-image { width: 200px; height: 200px; margin: 0 auto; }
-        }
-
-        @media (max-width: 768px) {
-            .nav-tabs { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; white-space: nowrap; top: 58px; padding: 0.75rem 1rem; scrollbar-width: none; }
-            .nav-tabs::-webkit-scrollbar { display: none; }
-            .tab-btn { flex: 0 0 auto; }
-            .top-bar { padding: 0.75rem 1rem; }
-            .logo { font-size: 18px; white-space: nowrap; }
-            .lang-btn { padding: 4px 8px; }
-            .showcase-grid { grid-template-columns: 1fr; }
-            .jumbotron h1 { font-size: 28px; line-height: 36px; }
-            main { padding: 1rem; margin-top: 120px; }
-            .modal-content { padding: 1.5rem; }
-            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-            .contact-card { min-width: 100%; }
-        }
-        
-        @media (max-width: 480px) {
-            .gallery-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body class="lang-es">
 
@@ -717,7 +106,7 @@
                 
                 <!-- ESPACIO PARA FOTO -->
                 <div class="jumbotron-image">
-                    <img src="luis-foto.jpg" alt="Luis Fernando Mendoza Gómez" width="640" height="853" fetchpriority="high" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'fas fa-user-tie fa-4x\'></i>';">
+                    <img src="img/perfil/luis-foto.jpg" alt="Luis Fernando Mendoza Gómez" width="640" height="853" fetchpriority="high" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'fas fa-user-tie fa-4x\'></i>';">
                 </div>
             </div>
         </section>
@@ -884,13 +273,14 @@
                 </div>
                 <!-- PROYECTO: FISIOALEPH -->
                 <div class="card showcase-card" onclick="openModal(this)" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal(this);}">
-                    <div class="showcase-cover"><img src="img/proyectos/fisioalephpro-web.webp" alt="FISIOALEPH" loading="lazy" style="object-position:top center"><span class="status-pill"><span data-lang="es">Web en desarrollo</span><span data-lang="en">Website in progress</span><span data-lang="de">Website in Arbeit</span></span></div>
+                    <div class="showcase-cover"><img src="img/proyectos/fisioalephpro-web.webp" alt="FISIOALEPH" loading="lazy" style="object-position:top center"><span class="status-pill"><span data-lang="es">Sitio en línea</span><span data-lang="en">Live site</span><span data-lang="de">Website online</span></span></div>
                     <div class="showcase-body">
                         <h3><span data-lang="es">FISIOALEPH</span><span data-lang="en">FISIOALEPH</span><span data-lang="de">FISIOALEPH</span></h3>
                         <p class="summary" data-lang="es">Marca sombrilla y portal web para fisioterapia: cinco unidades (Recupera-T, FisioalephPro, Fisioterapia Laboral, FisioSocial y AlphDigitalFisio) bajo una sola identidad.</p>
                         <p class="summary" data-lang="en">Umbrella brand and web portal for physiotherapy: five units (Recupera-T, FisioalephPro, Fisioterapia Laboral, FisioSocial and AlphDigitalFisio) under one identity.</p>
                         <p class="summary" data-lang="de">Dachmarke und Webportal für Physiotherapie: fünf Einheiten (Recupera-T, FisioalephPro, Fisioterapia Laboral, FisioSocial und AlphDigitalFisio) unter einer Identität.</p>
                         <div class="tech-row"><span class="tech-chip">React 19</span><span class="tech-chip">TypeScript</span><span class="tech-chip">Vite</span><span class="tech-chip">Tailwind CSS 4</span><span class="tech-chip">Motion</span></div>
+                        <a class="site-link" href="https://fisioalep.com/" target="_blank" rel="noopener" onclick="event.stopPropagation()" onkeydown="event.stopPropagation()"><i class="fas fa-arrow-up-right-from-square"></i> <span data-lang="es">Visitar FISIOALEP.com</span><span data-lang="en">Visit FISIOALEP.com</span><span data-lang="de">FISIOALEP.com besuchen</span></a>
                         <span class="click-hint"><span data-lang="es">Ver proyecto</span><span data-lang="en">View project</span><span data-lang="de">Projekt ansehen</span> <i class="fas fa-chevron-right"></i></span>
                     </div>
                     <div class="hidden-details">
@@ -902,6 +292,7 @@
                                 <li><strong>Antes y después:</strong> de fisioaleph.com, una página con solo el logotipo, a un portal completo que presenta las cinco unidades de negocio.</li>
                             </ul>
                             <div class="tech-row"><span class="tech-chip">React 19</span><span class="tech-chip">TypeScript</span><span class="tech-chip">Vite</span><span class="tech-chip">Tailwind CSS 4</span><span class="tech-chip">Motion</span></div>
+                            <p><a class="site-link" href="https://fisioalep.com/" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i> Visitar FISIOALEP.com</a></p>
                             <div class="ba-carousel" data-i="0"><div class="ba-nav"><button type="button" class="ba-arrow" data-dir="-1" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button><div class="ba-tabs" role="tablist"><button type="button" class="ba-dot active" data-go="0" role="tab">Antes</button><button type="button" class="ba-dot" data-go="1" role="tab">Después</button></div><button type="button" class="ba-arrow" data-dir="1" aria-label="Siguiente"><i class="fas fa-chevron-right"></i></button></div><div class="ba-slides"><figure class="ba-slide active"><span class="ba-tag ba-before">Antes</span><img src="img/proyectos/fisioaleph-antes.webp" alt="FISIOALEPH – Antes" loading="lazy" class="showcase-full"></figure><figure class="ba-slide"><span class="ba-tag ba-after">Después</span><img src="img/proyectos/fisioalephpro-web.webp" alt="FISIOALEPH – Después" loading="lazy" class="showcase-full"></figure></div><p class="ba-counter"><span class="ba-cur">1</span> / 2</p></div>
                         </div>
                         <div data-lang="en">
@@ -912,6 +303,7 @@
                                 <li><strong>Before &amp; after:</strong> from fisioaleph.com, a logo-only page, to a full portal presenting all five business units.</li>
                             </ul>
                             <div class="tech-row"><span class="tech-chip">React 19</span><span class="tech-chip">TypeScript</span><span class="tech-chip">Vite</span><span class="tech-chip">Tailwind CSS 4</span><span class="tech-chip">Motion</span></div>
+                            <p><a class="site-link" href="https://fisioalep.com/" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i> Visit FISIOALEP.com</a></p>
                             <div class="ba-carousel" data-i="0"><div class="ba-nav"><button type="button" class="ba-arrow" data-dir="-1" aria-label="Previous"><i class="fas fa-chevron-left"></i></button><div class="ba-tabs" role="tablist"><button type="button" class="ba-dot active" data-go="0" role="tab">Before</button><button type="button" class="ba-dot" data-go="1" role="tab">After</button></div><button type="button" class="ba-arrow" data-dir="1" aria-label="Next"><i class="fas fa-chevron-right"></i></button></div><div class="ba-slides"><figure class="ba-slide active"><span class="ba-tag ba-before">Before</span><img src="img/proyectos/fisioaleph-antes.webp" alt="FISIOALEPH – Before" loading="lazy" class="showcase-full"></figure><figure class="ba-slide"><span class="ba-tag ba-after">After</span><img src="img/proyectos/fisioalephpro-web.webp" alt="FISIOALEPH – After" loading="lazy" class="showcase-full"></figure></div><p class="ba-counter"><span class="ba-cur">1</span> / 2</p></div>
                         </div>
                         <div data-lang="de">
@@ -922,6 +314,7 @@
                                 <li><strong>Vorher &amp; nachher:</strong> von fisioaleph.com, einer reinen Logo-Seite, zu einem vollständigen Portal mit allen fünf Geschäftseinheiten.</li>
                             </ul>
                             <div class="tech-row"><span class="tech-chip">React 19</span><span class="tech-chip">TypeScript</span><span class="tech-chip">Vite</span><span class="tech-chip">Tailwind CSS 4</span><span class="tech-chip">Motion</span></div>
+                            <p><a class="site-link" href="https://fisioalep.com/" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i> FISIOALEP.com besuchen</a></p>
                             <div class="ba-carousel" data-i="0"><div class="ba-nav"><button type="button" class="ba-arrow" data-dir="-1" aria-label="Zurück"><i class="fas fa-chevron-left"></i></button><div class="ba-tabs" role="tablist"><button type="button" class="ba-dot active" data-go="0" role="tab">Vorher</button><button type="button" class="ba-dot" data-go="1" role="tab">Nachher</button></div><button type="button" class="ba-arrow" data-dir="1" aria-label="Weiter"><i class="fas fa-chevron-right"></i></button></div><div class="ba-slides"><figure class="ba-slide active"><span class="ba-tag ba-before">Vorher</span><img src="img/proyectos/fisioaleph-antes.webp" alt="FISIOALEPH – Vorher" loading="lazy" class="showcase-full"></figure><figure class="ba-slide"><span class="ba-tag ba-after">Nachher</span><img src="img/proyectos/fisioalephpro-web.webp" alt="FISIOALEPH – Nachher" loading="lazy" class="showcase-full"></figure></div><p class="ba-counter"><span class="ba-cur">1</span> / 2</p></div>
                         </div>
                     </div>
@@ -1096,7 +489,7 @@
                                 <li>Especialización en Desarrollo de Software Backend & Lógica de Datos - Oracle Next Education (2025).</li>
                                 <li>Certificaciones: Oracle Cloud Infrastructure (OCI) AI Foundations Associate y OCI Foundations Associate (2025).</li>
                             </ul>
-                            <a href="CV_Backend_Desarrollador.pdf" target="_blank" class="cv-link-btn">
+                            <a href="docs/cv/CV_Backend_Desarrollador.pdf" target="_blank" class="cv-link-btn">
                                 <i class="fas fa-file-pdf"></i> Ver CV (Backend)
                             </a>
                             <a href="https://github.com/IBTLuisGomez" target="_blank" class="cv-link-btn">
@@ -1111,7 +504,7 @@
                                 <li>Backend Software Development & Data Logic Specialization - Oracle Next Education (2025).</li>
                                 <li>Certifications: Oracle Cloud Infrastructure (OCI) AI Foundations Associate and OCI Foundations Associate (2025).</li>
                             </ul>
-                            <a href="CV_Backend_Desarrollador.pdf" target="_blank" class="cv-link-btn">
+                            <a href="docs/cv/CV_Backend_Desarrollador.pdf" target="_blank" class="cv-link-btn">
                                 <i class="fas fa-file-pdf"></i> View CV (Backend)
                             </a>
                             <a href="https://github.com/IBTLuisGomez" target="_blank" class="cv-link-btn">
@@ -1126,7 +519,7 @@
                                 <li>Spezialisierung auf Backend-Softwareentwicklung & Datenlogik - Oracle Next Education (2025).</li>
                                 <li>Zertifizierungen: Oracle Cloud Infrastructure (OCI) AI Foundations Associate und OCI Foundations Associate (2025).</li>
                             </ul>
-                            <a href="CV_Backend_Desarrollador.pdf" target="_blank" class="cv-link-btn">
+                            <a href="docs/cv/CV_Backend_Desarrollador.pdf" target="_blank" class="cv-link-btn">
                                 <i class="fas fa-file-pdf"></i> Lebenslauf ansehen (Backend)
                             </a>
                             <a href="https://github.com/IBTLuisGomez" target="_blank" class="cv-link-btn">
@@ -1163,7 +556,7 @@
                                 <li>Integración de estándares de interoperabilidad médica como HL7 FHIR, HL7v2 y Google Cloud Healthcare API en plataformas de laboratorio.</li>
                                 <li>Análisis de bases de datos estructuradas de métricas operativas mediante herramientas informáticas en Clínicas Recuperat (Mayo 2024-Abril 2025).</li>
                             </ul>
-                            <a href="CV_Backend_Desarrollador.pdf" target="_blank" class="cv-link-btn">
+                            <a href="docs/cv/CV_Backend_Desarrollador.pdf" target="_blank" class="cv-link-btn">
                                 <i class="fas fa-file-pdf"></i> Ver CV (Backend)
                             </a>
                         </div>
@@ -1175,7 +568,7 @@
                                 <li>Integration of medical interoperability standards such as HL7 FHIR, HL7v2, and Google Cloud Healthcare API into laboratory platforms.</li>
                                 <li>Analysis of structured databases of operational metrics using IT tools at Clínicas Recuperat (May 2024-April 2025).</li>
                             </ul>
-                            <a href="CV_Backend_Desarrollador.pdf" target="_blank" class="cv-link-btn">
+                            <a href="docs/cv/CV_Backend_Desarrollador.pdf" target="_blank" class="cv-link-btn">
                                 <i class="fas fa-file-pdf"></i> View CV (Backend)
                             </a>
                         </div>
@@ -1187,7 +580,7 @@
                                 <li>Integration medizinischer Interoperabilitätsstandards wie HL7 FHIR, HL7v2 und Google Cloud Healthcare API in Laborplattformen.</li>
                                 <li>Analyse strukturierter Datenbanken mit Betriebsmetriken unter Verwendung von IT-Tools bei Clínicas Recuperat (Mai 2024 - April 2025).</li>
                             </ul>
-                            <a href="CV_Backend_Desarrollador.pdf" target="_blank" class="cv-link-btn">
+                            <a href="docs/cv/CV_Backend_Desarrollador.pdf" target="_blank" class="cv-link-btn">
                                 <i class="fas fa-file-pdf"></i> Lebenslauf ansehen (Backend)
                             </a>
                         </div>
@@ -1203,28 +596,67 @@
                     <span data-lang="de">Projektdateien</span>
                 </h3>
                 <div class="gallery-grid">
-                    <div class="gallery-card">
+                    <div class="gallery-card is-link" onclick="openLinked('CytoCore LIMS')" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                         <img src="img/proyectos/cytocore-arquitectura.webp" class="gallery-img" alt="Arquitectura de CytoCore" loading="lazy" style="object-position:top">
                         <div class="gallery-content">
                             <h4><span data-lang="es">CytoCore LIMS</span><span data-lang="en">CytoCore LIMS</span><span data-lang="de">CytoCore LIMS</span></h4>
                             <p><span data-lang="es">Arquitectura backend para trazabilidad.</span><span data-lang="en">Backend architecture for traceability.</span><span data-lang="de">Backend-Architektur zur Rückverfolgbarkeit.</span></p>
+                            <span class="click-hint"><span data-lang="es">Ver más</span><span data-lang="en">See more</span><span data-lang="de">Mehr ansehen</span> <i class="fas fa-chevron-right"></i></span>
                         </div>
                     </div>
-                    <div class="gallery-card">
+                    <div class="gallery-card is-link" onclick="openLinked('KlinikPro')" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                         <img src="img/proyectos/klinikpro-escritorio.webp" class="gallery-img" alt="KlinikPro" loading="lazy">
                         <div class="gallery-content">
                             <h4><span data-lang="es">KlinikPro</span><span data-lang="en">KlinikPro</span><span data-lang="de">KlinikPro</span></h4>
                             <p><span data-lang="es">Sistema integral de administración clínica.</span><span data-lang="en">Comprehensive clinical management system.</span><span data-lang="de">Umfassendes klinisches Managementsystem.</span></p>
+                            <span class="click-hint"><span data-lang="es">Ver más</span><span data-lang="en">See more</span><span data-lang="de">Mehr ansehen</span> <i class="fas fa-chevron-right"></i></span>
                         </div>
                     </div>
-                    <div class="gallery-card">
-                        <!-- TODO: reemplaza por <img src="img/....webp" class="gallery-img" alt="..." loading="lazy"> -->
+                    <div class="gallery-card is-link" onclick="openModal(this)" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                         <div class="gallery-img gallery-placeholder" aria-hidden="true"><i class="fas fa-network-wired"></i></div>
                         <div class="gallery-content">
                             <h4><span data-lang="es">Expediente clínico HL7 FHIR</span><span data-lang="en">HL7 FHIR clinical record</span><span data-lang="de">HL7-FHIR-Patientenakte</span></h4>
                             <p><span data-lang="es">En construcción para FISIOALEPH.</span><span data-lang="en">Under construction for FISIOALEPH.</span><span data-lang="de">Im Aufbau für FISIOALEPH.</span></p>
+                            <span class="click-hint"><span data-lang="es">Ver más</span><span data-lang="en">See more</span><span data-lang="de">Mehr ansehen</span> <i class="fas fa-chevron-right"></i></span>
+                        </div>
+                        <div class="hidden-details">
+                            <div data-lang="es"><p>Expediente clínico electrónico basado en el estándar HL7 FHIR para el ecosistema FISIOALEPH.</p><ul><li><strong>Interoperabilidad:</strong> intercambio de información clínica mediante recursos FHIR.</li><li><strong>Estado:</strong> en construcción.</li></ul><div class="tech-row"><span class="tech-chip">HL7 FHIR</span><span class="tech-chip">Expediente clínico</span></div></div>
+                            <div data-lang="en"><p>Electronic clinical record based on the HL7 FHIR standard for the FISIOALEPH ecosystem.</p><ul><li><strong>Interoperability:</strong> clinical data exchange through FHIR resources.</li><li><strong>Status:</strong> under construction.</li></ul><div class="tech-row"><span class="tech-chip">HL7 FHIR</span><span class="tech-chip">Clinical record</span></div></div>
+                            <div data-lang="de"><p>Elektronische Patientenakte auf Basis des HL7-FHIR-Standards für das FISIOALEPH-Ökosystem.</p><ul><li><strong>Interoperabilität:</strong> Austausch klinischer Daten über FHIR-Ressourcen.</li><li><strong>Status:</strong> im Aufbau.</li></ul><div class="tech-row"><span class="tech-chip">HL7 FHIR</span><span class="tech-chip">Patientenakte</span></div></div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- REPOSITORIOS GITHUB -->
+            <div class="repo-block">
+                <h3 class="cert-heading"><i class="fab fa-github"></i> <span data-lang="es">Repositorios en GitHub</span><span data-lang="en">GitHub repositories</span><span data-lang="de">GitHub-Repositories</span></h3>
+                <p class="cert-intro"><span data-lang="es">Challenges de Oracle Next Education (ONE) · Alura Latam, con código público.</span><span data-lang="en">Oracle Next Education (ONE) · Alura Latam challenges, with public code.</span><span data-lang="de">Challenges von Oracle Next Education (ONE) · Alura Latam, mit öffentlichem Code.</span> <a class="repo-all" href="https://github.com/IBTLuisGomez?tab=repositories" target="_blank" rel="noopener"><span data-lang="es">Ver todos</span><span data-lang="en">View all</span><span data-lang="de">Alle ansehen</span> <i class="fas fa-chevron-right"></i></a></p>
+                <div class="repo-grid">
+                    <article class="repo-card">
+                        <div class="repo-head"><i class="fas fa-comments repo-icon"></i><div><h4>ForoHub API</h4><span class="repo-path"><i class="fab fa-github"></i> IBTLuisGomez/ForoHubChallenge-BackEnd-</span></div></div>
+                        <p class="repo-desc"><span data-lang="es">API REST de un foro: CRUD de tópicos con paginación, validación de duplicados y autenticación JWT sin estado. Proyecto final de la especialización Back-End de Oracle Next Education.</span><span data-lang="en">REST API for a forum: topic CRUD with pagination, duplicate validation and stateless JWT authentication. Capstone project of the Oracle Next Education Back-End track.</span><span data-lang="de">REST-API für ein Forum: CRUD für Themen mit Paginierung, Duplikatprüfung und zustandsloser JWT-Authentifizierung. Abschlussprojekt des Back-End-Tracks von Oracle Next Education.</span></p>
+                        <div class="tech-row"><span class="tech-chip">Java 17</span><span class="tech-chip">Spring Boot 3</span><span class="tech-chip">Spring Security</span><span class="tech-chip">JWT</span><span class="tech-chip">JPA</span><span class="tech-chip">Flyway</span><span class="tech-chip">MySQL</span></div>
+                        <div class="repo-links"><a href="https://github.com/IBTLuisGomez/ForoHubChallenge-BackEnd-" target="_blank" rel="noopener"><i class="fab fa-github"></i> <span data-lang="es">Ver código</span><span data-lang="en">View code</span><span data-lang="de">Code ansehen</span></a></div>
+                    </article>
+                    <article class="repo-card">
+                        <div class="repo-head"><i class="fas fa-book-open repo-icon"></i><div><h4>LiterAlura</h4><span class="repo-path"><i class="fab fa-github"></i> IBTLuisGomez/LiterAluraChallenge</span></div></div>
+                        <p class="repo-desc"><span data-lang="es">Catálogo de libros que consume la API Gutendex (Proyecto Gutenberg) y guarda en PostgreSQL: búsqueda por título, autores vivos en un año dado y filtro por idioma.</span><span data-lang="en">Book catalog that consumes the Gutendex API (Project Gutenberg) and stores data in PostgreSQL: search by title, authors alive in a given year and language filter.</span><span data-lang="de">Buchkatalog, der die Gutendex-API (Projekt Gutenberg) nutzt und in PostgreSQL speichert: Titelsuche, zu einem Jahr lebende Autoren und Sprachfilter.</span></p>
+                        <div class="tech-row"><span class="tech-chip">Java 17</span><span class="tech-chip">Spring Boot</span><span class="tech-chip">Spring Data JPA</span><span class="tech-chip">PostgreSQL</span><span class="tech-chip">Maven</span><span class="tech-chip">Jackson</span></div>
+                        <div class="repo-links"><a href="https://github.com/IBTLuisGomez/LiterAluraChallenge" target="_blank" rel="noopener"><i class="fab fa-github"></i> <span data-lang="es">Ver código</span><span data-lang="en">View code</span><span data-lang="de">Code ansehen</span></a></div>
+                    </article>
+                    <article class="repo-card">
+                        <div class="repo-head"><i class="fas fa-money-bill-wave repo-icon"></i><div><h4>Conversor de Monedas</h4><span class="repo-path"><i class="fab fa-github"></i> IBTLuisGomez/AluraConversorMonedasChallenge</span></div></div>
+                        <p class="repo-desc"><span data-lang="es">Conversor de divisas en consola con tasas en tiempo real de ExchangeRate-API: USD frente a ARS, BOB, BRL, CLP, COP y MXN.</span><span data-lang="en">Console currency converter with real-time rates from ExchangeRate-API: USD against ARS, BOB, BRL, CLP, COP and MXN.</span><span data-lang="de">Konsolen-Währungsrechner mit Echtzeitkursen der ExchangeRate-API: USD gegenüber ARS, BOB, BRL, CLP, COP und MXN.</span></p>
+                        <div class="tech-row"><span class="tech-chip">Java 17</span><span class="tech-chip">HttpClient</span><span class="tech-chip">Gson</span><span class="tech-chip">REST API</span></div>
+                        <div class="repo-links"><a href="https://github.com/IBTLuisGomez/AluraConversorMonedasChallenge" target="_blank" rel="noopener"><i class="fab fa-github"></i> <span data-lang="es">Ver código</span><span data-lang="en">View code</span><span data-lang="de">Code ansehen</span></a></div>
+                    </article>
+                    <article class="repo-card">
+                        <div class="repo-head"><i class="fas fa-lock repo-icon"></i><div><h4>Encriptador de texto</h4><span class="repo-path"><i class="fab fa-github"></i> IBTLuisGomez/Encriptador-de-text-ONE-Oracle</span></div></div>
+                        <p class="repo-desc"><span data-lang="es">Aplicación web que encripta y desencripta texto por sustitución de vocales, con validación de entrada, copiar al portapapeles y diseño responsivo.</span><span data-lang="en">Web app that encrypts and decrypts text by vowel substitution, with input validation, copy to clipboard and responsive design.</span><span data-lang="de">Web-App, die Text per Vokalsubstitution ver- und entschlüsselt, mit Eingabevalidierung, Kopieren in die Zwischenablage und responsivem Design.</span></p>
+                        <div class="tech-row"><span class="tech-chip">HTML5</span><span class="tech-chip">CSS3</span><span class="tech-chip">JavaScript</span></div>
+                        <div class="repo-links"><a href="https://github.com/IBTLuisGomez/Encriptador-de-text-ONE-Oracle" target="_blank" rel="noopener"><i class="fab fa-github"></i> <span data-lang="es">Ver código</span><span data-lang="en">View code</span><span data-lang="de">Code ansehen</span></a><a href="https://ibtluisgomez.github.io/Encriptador-de-text-ONE-Oracle/" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i> <span data-lang="es">Ver demo</span><span data-lang="en">Live demo</span><span data-lang="de">Live-Demo</span></a></div>
+                    </article>
                 </div>
             </div>
 
@@ -1336,7 +768,7 @@
                                 <li>Gerente de Operaciones y Desarrollo de Productos en Farmacias Naturissima (Nov 2018 - Abr 2021): Gestión del ciclo completo de desarrollo de productos nutracéuticos y cosméticos.</li>
                                 <li>Formación en Validación y Modelo de Negocio - Hub Panamericano de Emprendimiento UP (2026).</li>
                             </ul>
-                            <a href="CV_Consultor_Innovacion.pdf" target="_blank" class="cv-link-btn">
+                            <a href="docs/cv/CV_Consultor_Innovacion.pdf" target="_blank" class="cv-link-btn">
                                 <i class="fas fa-file-pdf"></i> Ver CV (Innovación)
                             </a>
                         </div>
@@ -1348,7 +780,7 @@
                                 <li>Operations and Product Dev Manager at Farmacias Naturissima (Nov 2018 - Apr 2021): Management of the complete development cycle of nutraceutical and cosmetic products.</li>
                                 <li>Validation and Business Model Training - Hub Panamericano de Emprendimiento UP (2026).</li>
                             </ul>
-                            <a href="CV_Consultor_Innovacion.pdf" target="_blank" class="cv-link-btn">
+                            <a href="docs/cv/CV_Consultor_Innovacion.pdf" target="_blank" class="cv-link-btn">
                                 <i class="fas fa-file-pdf"></i> View CV (Innovation)
                             </a>
                         </div>
@@ -1360,7 +792,7 @@
                                 <li>Leiter Operations und Produktentwicklung bei Farmacias Naturissima (Nov 2018 - Apr 2021): Verwaltung des gesamten Entwicklungszyklus von nutrazeutischen und kosmetischen Produkten.</li>
                                 <li>Weiterbildung in Validierung und Geschäftsmodellen - Hub Panamericano de Emprendimiento UP (2026).</li>
                             </ul>
-                            <a href="CV_Consultor_Innovacion.pdf" target="_blank" class="cv-link-btn">
+                            <a href="docs/cv/CV_Consultor_Innovacion.pdf" target="_blank" class="cv-link-btn">
                                 <i class="fas fa-file-pdf"></i> Lebenslauf ansehen (Innovation)
                             </a>
                         </div>
@@ -1392,7 +824,7 @@
                                 <li>Gerente de SGC y Aseguramiento de Calidad en Xelle Scientific (Abril 2025-Actualidad): Implementación integral del Sistema de Gestión de Calidad (SOPs, matrices AMFE) y dossier regulatorio ante COFEPRIS (NOM-059, NOM-241).</li>
                                 <li>Automatización del cálculo de prioridades de riesgo (IPR) mediante matrices cuantitativas, logrando trazabilidad total de registros históricos.</li>
                             </ul>
-                            <a href="CV_Consultor_Innovacion.pdf" target="_blank" class="cv-link-btn">
+                            <a href="docs/cv/CV_Consultor_Innovacion.pdf" target="_blank" class="cv-link-btn">
                                 <i class="fas fa-file-pdf"></i> Ver CV (Calidad)
                             </a>
                         </div>
@@ -1402,7 +834,7 @@
                                 <li>QMS & Quality Assurance Manager at Xelle Scientific (April 2025-Present): Comprehensive implementation of the Quality Management System (SOPs, AMFE matrices) and regulatory dossier for COFEPRIS (NOM-059, NOM-241).</li>
                                 <li>Automation of risk priority calculation (IPR) using quantitative matrices, achieving total traceability of historical records.</li>
                             </ul>
-                            <a href="CV_Consultor_Innovacion.pdf" target="_blank" class="cv-link-btn">
+                            <a href="docs/cv/CV_Consultor_Innovacion.pdf" target="_blank" class="cv-link-btn">
                                 <i class="fas fa-file-pdf"></i> View CV (Quality)
                             </a>
                         </div>
@@ -1412,7 +844,7 @@
                                 <li>QMS & Quality Assurance Manager bei Xelle Scientific (April 2025 - heute): Umfassende Implementierung des Qualitätsmanagementsystems (SOPs, AMFE-Matrizen) und regulatorisches Dossier für COFEPRIS (NOM-059, NOM-241).</li>
                                 <li>Automatisierung der Risikoprioritätsberechnung (IPR) mittels quantitativer Matrizen zur vollständigen Rückverfolgbarkeit historischer Aufzeichnungen.</li>
                             </ul>
-                            <a href="CV_Consultor_Innovacion.pdf" target="_blank" class="cv-link-btn">
+                            <a href="docs/cv/CV_Consultor_Innovacion.pdf" target="_blank" class="cv-link-btn">
                                 <i class="fas fa-file-pdf"></i> Lebenslauf ansehen (Qualität)
                             </a>
                         </div>
@@ -1670,7 +1102,7 @@
                                 <li>Investigador de Posgrado en CIATEJ (Enero 2022-Mayo 2024): Liderazgo en proyectos de diferenciación celular y escalamiento en biorreactores para terapias celulares avanzadas.</li>
                                 <li>Sólido dominio técnico en el mantenimiento de protocolos BSL-2.</li>
                             </ul>
-                            <a href="CV_Biotecnologia_Cultivo.pdf" target="_blank" class="cv-link-btn">
+                            <a href="docs/cv/CV_Biotecnologia_Cultivo.pdf" target="_blank" class="cv-link-btn">
                                 <i class="fas fa-file-pdf"></i> Ver CV (Cultivo Celular)
                             </a>
                         </div>
@@ -1682,7 +1114,7 @@
                                 <li>Graduate Researcher at CIATEJ (Jan 2022-May 2024): Leadership in cell differentiation projects and bioreactor scaling for advanced cellular therapies.</li>
                                 <li>Solid technical mastery in maintaining BSL-2 protocols.</li>
                             </ul>
-                            <a href="CV_Biotecnologia_Cultivo.pdf" target="_blank" class="cv-link-btn">
+                            <a href="docs/cv/CV_Biotecnologia_Cultivo.pdf" target="_blank" class="cv-link-btn">
                                 <i class="fas fa-file-pdf"></i> View CV (Cell Culture)
                             </a>
                         </div>
@@ -1694,7 +1126,7 @@
                                 <li>Wissenschaftlicher Mitarbeiter (Masterstudium) am CIATEJ (Jan 2022 - Mai 2024): Leitung von Projekten zur Zelldifferenzierung und Skalierung in Bioreaktoren für fortgeschrittene Zelltherapien.</li>
                                 <li>Solides technisches Know-how in der Aufrechterhaltung von BSL-2-Protokollen.</li>
                             </ul>
-                            <a href="CV_Biotecnologia_Cultivo.pdf" target="_blank" class="cv-link-btn">
+                            <a href="docs/cv/CV_Biotecnologia_Cultivo.pdf" target="_blank" class="cv-link-btn">
                                 <i class="fas fa-file-pdf"></i> Lebenslauf ansehen (Zellkultur)
                             </a>
                         </div>
@@ -1728,7 +1160,7 @@
                                 <li><strong>Patente:</strong> Inventor en la patente MX/a/2019/014819 (solicitada en 2019) por el desarrollo de construcciones genéticas.</li>
                                 <li><strong>Tesis e Investigación:</strong> Tesis de Maestría en Ciencias en Innovación Biotecnológica desarrollada en el CIATEJ (2024).</li>
                             </ul>
-                            <a href="CV_Biotecnologia_Cultivo.pdf" target="_blank" class="cv-link-btn">
+                            <a href="docs/cv/CV_Biotecnologia_Cultivo.pdf" target="_blank" class="cv-link-btn">
                                 <i class="fas fa-file-pdf"></i> Ver CV (Biología Molecular)
                             </a>
                         </div>
@@ -1740,7 +1172,7 @@
                                 <li><strong>Patent:</strong> Inventor on patent MX/a/2019/014819 (filed in 2019) for the development of genetic constructs.</li>
                                 <li><strong>Thesis & Research:</strong> Master's Thesis in Pharmaceutical Biotech Innovation developed at CIATEJ (2024).</li>
                             </ul>
-                            <a href="CV_Biotecnologia_Cultivo.pdf" target="_blank" class="cv-link-btn">
+                            <a href="docs/cv/CV_Biotecnologia_Cultivo.pdf" target="_blank" class="cv-link-btn">
                                 <i class="fas fa-file-pdf"></i> View CV (Molecular Biology)
                             </a>
                         </div>
@@ -1752,7 +1184,7 @@
                                 <li><strong>Patent:</strong> Erfinder des Patents MX/a/2019/014819 (angemeldet 2019) für die Entwicklung genetischer Konstrukte.</li>
                                 <li><strong>Thesis:</strong> Masterarbeit in Pharmazeutischer Biotech-Innovation (CIATEJ, 2024).</li>
                             </ul>
-                            <a href="CV_Biotecnologia_Cultivo.pdf" target="_blank" class="cv-link-btn">
+                            <a href="docs/cv/CV_Biotecnologia_Cultivo.pdf" target="_blank" class="cv-link-btn">
                                 <i class="fas fa-file-pdf"></i> Lebenslauf ansehen (Molekularbiologie)
                             </a>
                         </div>
@@ -2632,90 +2064,6 @@
         </div>
     </div>
 
-    <script>
-        // Lógica de navegación entre pestañas
-        function switchTab(tabId, btn) {
-            document.querySelectorAll('.view-section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.getElementById(tabId).classList.add('active');
-            if (btn) btn.classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Sistema de Idioma
-        function setLanguage(lang) {
-            document.body.className = `lang-${lang}`;
-            document.documentElement.lang = lang;
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if(btn.innerText.toLowerCase() === lang) {
-                    btn.classList.add('active');
-                }
-            });
-            
-            const modal = document.getElementById('detailModal');
-            if(modal.classList.contains('show') && currentCardElement) {
-                updateModalContent(currentCardElement, lang);
-            }
-        }
-
-        // Lógica del Modal
-        let currentCardElement = null;
-
-        function openModal(cardElement) {
-            currentCardElement = cardElement;
-            const currentLang = document.body.className.split('-')[1] || 'es'; 
-            updateModalContent(cardElement, currentLang);
-            
-            const modal = document.getElementById('detailModal');
-            modal.querySelector('.modal-content').classList.toggle('wide', cardElement.classList.contains('showcase-card'));
-            modal.classList.add('show');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function updateModalContent(cardElement, lang) {
-            const titleSpan = cardElement.querySelector(`h3 span[data-lang="${lang}"]`);
-            const title = titleSpan ? titleSpan.innerText : cardElement.querySelector('h3').innerText;
-            
-            const detailsDiv = cardElement.querySelector(`.hidden-details div[data-lang="${lang}"]`);
-            const detailsHtml = detailsDiv ? detailsDiv.innerHTML : cardElement.querySelector('.hidden-details').innerHTML;
-
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalBody').innerHTML = detailsHtml;
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('detailModal');
-            modal.classList.remove('show');
-            document.body.style.overflow = 'auto';
-            currentCardElement = null;
-        }
-
-        function closeModalOnOutsideClick(event) {
-            const modal = document.getElementById('detailModal');
-            if (event.target === modal) {
-                closeModal();
-            }
-        }
-        // Cerrar modal con Escape
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape' && document.getElementById('detailModal').classList.contains('show')) closeModal();
-        });
-
-        // Carrusel Antes / Después (delegado: funciona dentro del modal)
-        (function(){
-            function go(c,n){const sl=c.querySelectorAll('.ba-slide'),dt=c.querySelectorAll('.ba-dot');n=(n+sl.length)%sl.length;c.dataset.i=n;
-                sl.forEach((x,k)=>x.classList.toggle('active',k===n));dt.forEach((x,k)=>{x.classList.toggle('active',k===n);x.setAttribute('aria-selected',k===n)});
-                const cur=c.querySelector('.ba-cur');if(cur)cur.textContent=n+1;}
-            document.addEventListener('click',function(e){const b=e.target.closest('.ba-carousel [data-go], .ba-carousel [data-dir]');if(!b)return;e.stopPropagation();
-                const c=b.closest('.ba-carousel');const i=+c.dataset.i||0;go(c,b.dataset.go!==undefined?+b.dataset.go:i+(+b.dataset.dir));});
-            let x0=null;document.addEventListener('touchstart',e=>{if(e.target.closest('.ba-slides'))x0=e.touches[0].clientX;},{passive:true});
-            document.addEventListener('touchend',e=>{if(x0===null)return;const c=e.target.closest('.ba-carousel');const dx=e.changedTouches[0].clientX-x0;x0=null;if(c&&Math.abs(dx)>50)go(c,(+c.dataset.i||0)+(dx<0?1:-1));},{passive:true});
-        })();
-    </script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
